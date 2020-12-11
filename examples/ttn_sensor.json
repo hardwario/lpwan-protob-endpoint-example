@@ -1,0 +1,10 @@
+{
+  "app_id": "hio-example",
+  "dev_id": "1",
+  "hardware_serial": "AABBCCDDEEFF0011",
+  "port": 1,
+  "counter": 1,
+  "payload_raw": "CgMIngESCQgBEAEYteildSoDCIUpMgwI4RMQmyEgwwoolg8=",
+  "metadata": { "time": "2020-11-20T12:00:00.00Z", "frequency": 867.3, "modulation": "LORA", "data_rate": "SF9BW125", "coding_rate": "4/5", "gateways": [] },
+  "downlink_url": "https://integrations.thethingsnetwork.org/ttn-eu/api/v2/down/..."
+}
