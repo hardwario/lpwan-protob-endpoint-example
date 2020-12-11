@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+import 'nanopb.proto';
+import 'src/protob/hio.proto';
+
+option (nanopb_fileopt).long_names = false;
+
+enum pb_co2_calibration_type_t
+{
+    SUNRISE_CALIBRATION_NONE = 0;
+    SUNRISE_CALIBRATION_FORCED_ABC = 1;
+    SUNRISE_CALIBRATION_BACKGROUND = 2;
+    SUNRISE_CALIBRATION_TARGET = 3;
+}
+
+enum pb_frame_profile_t
+{
+    PB_PROFILE_NONE = 0;
+    PB_PROFILE_AMBIENT_MONITOR = 1;
+}
+
+enum pb_frame_hardware_t
+{
+    PB_HARDWARE_NONE = 0;
+    PB_HARDWARE_R1_0 = 1;
+}
+
+message pb_co2_calibration_t
+{
+    pb_co2_calibration_type_t calibration_type = 1;
+    int32 calibration_target = 2;
+}
+
+message pb_infrared_t
+{
+    int32 width = 1;
+    int32 height = 2;
+    int32 bits = 3;
+    int32 min = 4;
+    int32 max = 5;
+    bytes samples = 6;
+}
+
+message pb_frame_t
+{
+    int32 sequence = 1;
+}
+
+message pb_device_t
+{
+    pb_frame_profile_t profile = 1;
+    pb_frame_hardware_t hardware = 2;
+    int32 firmware = 3 [(hio).hex = 4];
+}
+
+message pb_nbiot_netstat_t
+{
+    int32 spr = 1;
+    int32 tpr = 2;
+    int32 txp = 3;
+    int32 txt = 4;
+    int32 rxt = 5;
+    int32 cid = 6;
+    int32 ecl = 7;
+    int32 snr = 8;
+    int32 efn = 9;
+    int32 pci = 10;
+    int32 rsr = 11;
+}
+
+message pb_event_t
+{
+    bool boot = 1;
+    bool pir = 2;
+}
+
+message pb_voltage_t
+{
+    int32 battery = 1 [(hio).multiplied = 1000];
+    int32 external = 2 [(hio).multiplied = 1000];
+}
+
+message pb_sensor_t
+{
+    int32 temperature = 1 [(hio).multiplied = 100];
+    int32 humidity = 2 [(hio).multiplied = 100];
+    int32 luminance = 3;
+    int32 pir = 4;
+    int32 co2 = 5;
+    int32 voc = 6;
+}
+
+message pb_mic_t
+{
+    int32 min = 1;
+    int32 max = 2;
+}
+
+message pb_packet_t {
+    pb_frame_t frame = 1;
+    pb_device_t device = 2;
+    pb_nbiot_netstat_t netstat = 3;
+    pb_event_t event = 4;
+    pb_voltage_t voltage = 5;
+    pb_sensor_t sensor = 6;
+    pb_mic_t mic = 7;
+    pb_co2_calibration_t co2_calibration = 8;
+    pb_infrared_t infrared = 9;
+}
