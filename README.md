@@ -73,13 +73,14 @@ curl -X POST -H "Content-Type: application/json" -d @examples/ttn_infra.json htt
 
 ## CLI tool
 
-Choose the proto file and append HEX string 
+Choose the proto file and append HEX string. Use the `decode-hex` command.
 
 ```
 npm run decode-hex examples/message.proto 0a0208054a86010810100c1805209c1128ab173278028821c210a3a4638e21648c31c20886d4764819a688414619e5bdc88e31679441481a8935e8d0296814424a2a14b927db39a78c41102a0c3527212a4488519a3269ad17e53a871052181b861e27a74b658c41d62a052a36a944428840102304b995f74d4494620e24e5c414b356434935ca22c55048f563
 ```
 
-### BASE64 data
+TTN sending data in `base64`. You can decode that with `decode-base64` command.
+
 ```
 npm run decode-base64 examples/message.proto CgIIBUqGAQgQEAwYBSCcESirFzJ4AoghwhCjpGOOIWSMMcIIhtR2SBmmiEFGGeW9yI4xZ5RBSBqJNejQKWgUQkoqFLkn2zmnjEEQKgw1JyEqRIhRmjJprRflOocQUhgbhh4np0tljEHWKgUqNqlEQohAECMEuZX3TUSUYg4k5cQUs1ZDSTXKIsVQSPVj
 ```
