@@ -1,6 +1,14 @@
+const fs = require('fs');
 const express = require('express');
 
 require('dotenv-defaults').config();
+
+if (!fs.existsSync(process.env.PROTO_FILE)) {
+  // eslint-disable-next-line max-len
+  console.error('Cannot find message.proto file in project directory. You can copy it from examples/message.proto or run npm dev to use examples/message.proto.\n\n\n');
+  process.exit(1);
+}
+
 const app = express();
 app.use(express.json());
 
