@@ -16,7 +16,7 @@ Usually when low-power device sends data it has to pack them efficiently to the 
 This can get really complex and it adds more time to the development since you have to create a decoder in the device firmware usually in C/C++, then you have to create decoder on the server usually in node/python/anything.
 Then every single change is time consuming and very prone to errors.
 
-Protobuffers is a library which uses protofile `*.proto` which describes message, structures and number and positions of each item. We use version `proto3` which has every item optional. This way the device can decide which item in each packet will be and save data. Also it has smart encoding of numbers. The data type `int32` is flexible and if you have values 0-127 it fills just a single byte in teh message. If the number is bigger it can have 2, 3 or 4 bytes. This and many other features makes this library very efficient.
+Protobuffers is a library which uses protofile `*.proto` which describes message, structures and number and positions of each item. We use version `proto3` which has every item optional. This way the device can decide which item in each packet will be and send only needed data.  It has also smart encoding of numbers. The data type `int32` is flexible and if you have values 0-127 it fills just a single byte in the message. If the number is bigger it can have 2, 3 or 4 bytes. This and many other features makes this library very efficient.
 
 [Protocol buffers website](https://developers.google.com/protocol-buffers)
 
@@ -46,13 +46,18 @@ npm start
 
 ## Environment variables
 
-You can change setting using these environment variables. We are using [dotenv-defaults](https://www.npmjs.com/package/dotenv-defaults) package which loads this settings from `.env.defaults` file if you do not apply them syste-wide or from command-line.
+You can change setting using these environment variables. We are using [dotenv-defaults](https://www.npmjs.com/package/dotenv-defaults) package which loads this settings from `.env.defaults` (you can change them here) file if you do not apply them system-wide or from command-line.
 
 |    Name    |    Default    |
 | ---------- | ------------- |
 | PORT       | 8080          |
 | PROTO_FILE | message.proto |
 | URL_PREFIX |               |
+
+In Linux you can set variables together with starting the decoder
+```
+PROTO_FILE="examples/message.proto" PORT=8000 npm start
+```
 
 ## Test with curl
 
@@ -71,7 +76,12 @@ curl -X POST -H "Content-Type: application/json" -d @examples/ttn_sensor.json ht
 curl -X POST -H "Content-Type: application/json" -d @examples/ttn_infra.json http://localhost:8080/ttn
 ```
 
+You can also use `httpie` (which has tool named `http`) tool which also prettifies the JSON output.
+Command: `http http://localhost:8080/ttn < examples/ttn_sensor.json`
+
 ## CLI tool
+
+With CLI tool you can decode raw hex string or base64 string in the command line without need to run the server. It is also useful when you use more than one protobuf file because you set them in parameter.
 
 Choose the proto file and append HEX string. Use the `decode-hex` command.
 
@@ -79,7 +89,7 @@ Choose the proto file and append HEX string. Use the `decode-hex` command.
 npm run decode-hex examples/message.proto 0a0208054a86010810100c1805209c1128ab173278028821c210a3a4638e21648c31c20886d4764819a688414619e5bdc88e31679441481a8935e8d0296814424a2a14b927db39a78c41102a0c3527212a4488519a3269ad17e53a871052181b861e27a74b658c41d62a052a36a944428840102304b995f74d4494620e24e5c414b356434935ca22c55048f563
 ```
 
-TTN sending data in `base64`. You can decode that with `decode-base64` command.
+TTN is sending data in `base64`. You can decode that with `decode-base64` command.
 
 ```
 npm run decode-base64 examples/message.proto CgIIBUqGAQgQEAwYBSCcESirFzJ4AoghwhCjpGOOIWSMMcIIhtR2SBmmiEFGGeW9yI4xZ5RBSBqJNejQKWgUQkoqFLkn2zmnjEEQKgw1JyEqRIhRmjJprRflOocQUhgbhh4np0tljEHWKgUqNqlEQohAECMEuZX3TUSUYg4k5cQUs1ZDSTXKIsVQSPVj
