@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "PROTO_FILE='test/message.proto' node src/index.js",
+    "dev": "PROTO_FILE='examples/message.proto' node src/index.js",
     "test": "mocha --exit",
     "lint": "./node_modules/eslint/bin/eslint.js -c .eslintrc.json --fix ./"
   },

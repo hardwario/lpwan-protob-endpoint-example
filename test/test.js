@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-process.env.PROTO_FILE = 'test/message.proto';
+process.env.PROTO_FILE = 'test/test.proto';
 
 const request = require('supertest');
 const expect = require('chai').expect;
