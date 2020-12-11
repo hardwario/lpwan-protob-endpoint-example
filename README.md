@@ -16,18 +16,19 @@ cd lpwan-protob-endpoint-example
 npm install
 ```
 
-### Run
-```
-npm start
-```
-
 ### Development
-uses proto file from test folder
+Uses proto file from examples/message.proto
 ```
 npm run dev
 ```
 ```
 npm run test
+```
+
+### Run
+Copy your message.proto file to project directory and
+```
+npm start
 ```
 
 ## Environ
