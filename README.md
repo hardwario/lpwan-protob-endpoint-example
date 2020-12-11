@@ -9,6 +9,20 @@
 
 This is an generic example HTTP endpoint for The Things Network (TTN) and České Radiokomunikace (CRA). You can use also the CLI tool to just decode the HEX string.
 
+## Why protobuffers
+
+Usually when low-power device sends data it has to pack them efficiently to the transmitting packet. This works fine if your packet is always the same and the items are fixed. It gets more complicated if you have different packets with different items. Now you have to have some kind of header which says to decoder which bytes are which items. 
+
+This can get really complex and it adds more time to the development since you have to create a decoder in the device firmware usually in C/C++, then you have to create decoder on the server usually in node/python/anything.
+Then every single change is time consuming and very prone to errors.
+
+Protobuffers is a library which uses protofile `*.proto` which describes message, structures and number and positions of each item. We use version `proto3` which has every item optional. This way the device can decide which item in each packet will be and save data. Also it has smart encoding of numbers. The data type `int32` is flexible and if you have values 0-127 it fills just a single byte in teh message. If the number is bigger it can have 2, 3 or 4 bytes. This and many other features makes this library very efficient.
+
+[Protocol buffers website](https://developers.google.com/protocol-buffers)
+
+On the device in firmware we use smaller protobuf encoder called [nanopb](https://jpa.kapsi.fi/nanopb/) with static memory allocations.
+
+
 ## Download
 ```
 git clone https://github.com/hardwario/lpwan-protob-endpoint-example.git
