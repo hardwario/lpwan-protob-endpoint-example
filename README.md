@@ -6,9 +6,10 @@
 [![License](https://img.shields.io/github/license/hardwario/lpwan-protob-endpoint-example.svg)](https://github.com/hardwario/lpwan-protob-endpoint-example/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/hardwario_en.svg?style=social&label=Follow)](https://twitter.com/hardwario_en)
 
-## Usage
 
-### Prepare
+This is an example HTTP endpoint for TheThingNetwork and CRA Czech Radio Communication. You can use also the CLI tool to just decode the HEX string.
+
+## Download
 
 ```
 git clone https://github.com/hardwario/lpwan-protob-endpoint-example.git
@@ -16,33 +17,43 @@ cd lpwan-protob-endpoint-example
 npm install
 ```
 
-### Development
-Uses proto file from examples/message.proto
+## Development
+Uses example proto file from `examples/message.proto`
 ```
 npm run dev
 ```
-```
-npm run test
-```
 
-### Run
-Copy your message.proto file to project directory and
+## Run
+Create or copy message.proto file to the project directory and
 ```
 npm start
 ```
 
-## Environ
+## Environment variables
 
-| Name | Default |
-| ---  |-------- |
-| PORT | 8080    |
+|    Name    |    Default    |
+| ---------- | ------------- |
+| PORT       | 8080          |
 | PROTO_FILE | message.proto |
-| URL_PREFIX |   |
+| URL_PREFIX |               |
 
 ## Test with curl
 
 ```
 curl -X POST -H "Content-Type: application/json" -d @examples/cra.json http://localhost:8080/cra
+```
+
+## CLI tool
+
+```
+npm run decode examples/message.proto 0a0208054a86010810100c1805209c1128ab173278028821c210a3a4638e21648c31c20886d4764819a688414619e5bdc88e31679441481a8935e8d0296814424a2a14b927db39a78c41102a0c3527212a4488519a3269ad17e53a871052181b861e27a74b658c41d62a052a36a944428840102304b995f74d4494620e24e5c414b356434935ca22c55048f563
+```
+
+## Test
+You can run integrated tests by
+
+```
+npm run test
 ```
 
 ## License
