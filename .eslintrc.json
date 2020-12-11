@@ -1,0 +1,46 @@
+{
+	"env": {
+		"browser": true,
+		"node": true,
+		"mocha": true
+	},
+	"extends": "standard",
+	"globals": {
+		"_": true
+	},
+	"plugins": [
+		"chai-friendly"
+	],
+	"rules": {
+		"indent": ["error", 2 ],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"quotes": [
+			"error",
+			"single",
+			{ "allowTemplateLiterals": true }
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"no-tabs": "off",
+		"comma-dangle": ["error", {
+				"arrays": "always-multiline",
+				"objects": "always-multiline",
+				"imports": "never",
+				"exports": "never",
+				"functions": "never"
+		}],
+		"max-len": [1, 120],
+		"arrow-parens": "error",
+		"new-cap": "off",
+		"no-useless-escape": "warn",
+		"camelcase": "off",
+		"padded-blocks": "off",
+		"no-unused-expressions": 0,
+		"chai-friendly/no-unused-expressions": 2
+	}
+}
