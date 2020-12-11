@@ -3,15 +3,19 @@ const protob = require('./protob');
 
 try {
 
-  if (process.argv.length !== 4) {
-    throw Error('Usage: npm run decode <proto-file-path> <hex-string>');
+  if (process.argv.length !== 5) {
+    throw Error('Usage: \n' +
+      'npm run decode-hex <proto-file-path> <hex-string>\n' +
+      'npm run decode-bae64 <proto-file-path> <hex-string>');
   }
 
-  if (!fs.existsSync(process.argv[2])) {
-    throw Error(`Cannot find proto file: ${process.argv[2]}`);
+  const filename = process.argv[3];
+
+  if (!fs.existsSync(filename)) {
+    throw Error(`Cannot find proto file: ${filename}`);
   }
-  const buffer = Buffer.from(process.argv[3], 'hex');
-  const PBPacket = protob.createPBPacket(process.argv[2]);
+  const buffer = Buffer.from(process.argv[4], process.argv[2]);
+  const PBPacket = protob.createPBPacket(filename);
   const data = protob.decodePacket(PBPacket, buffer);
   console.log(JSON.stringify(data, null, 2));
 

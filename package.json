@@ -8,7 +8,8 @@
     "dev": "PROTO_FILE='examples/message.proto' node src/index.js",
     "test": "mocha --exit",
     "lint": "./node_modules/eslint/bin/eslint.js -c .eslintrc.json --fix ./",
-    "decode": "node src/cli-decode.js"
+    "decode-hex": "node src/cli-decode.js hex",
+    "decode-base64": "node src/cli-decode.js base64"
   },
   "repository": {
     "type": "git",
