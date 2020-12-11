@@ -39,6 +39,11 @@ npm start
 | PROTO_FILE | message.proto |
 | URL_PREFIX |   |
 
+## Test with curl
+
+```
+curl -X POST -H "Content-Type: application/json" -d @examples/cra.json http://localhost:8080/cra
+```
 
 ## License
 
