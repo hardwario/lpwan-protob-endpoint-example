@@ -20,6 +20,14 @@ function map (x, in_min, in_max, out_min, out_max) {
 }
 
 function updateData (data, field) {
+
+  if (Array.isArray(data)) {
+    for (let i = 0, l = data.length; i < l; i++) {
+      updateData(data[i], field);
+    }
+    return;
+  }
+
   for (const key in data) {
     if (field.fields === undefined) {
       continue;
@@ -85,7 +93,8 @@ function updateData (data, field) {
 }
 
 exports.createPBPacket = (filename) => {
-  const root = protobuf.loadSync(filename);
+  const root = new protobuf.Root();
+  root.loadSync(filename, { keepCase: true });
 
   // Obtain a message type
   const PBPacket = findPBPacket(root);
